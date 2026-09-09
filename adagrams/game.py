@@ -15,12 +15,18 @@ def draw_letters():
         random_index = randint(0, len(list)-1)
         hand.append(list[random_index])
         list.remove(list[random_index])
-    #print(list)
-    #print(hand)
     return hand 
     
 def uses_available_letters(word, letter_bank):
-    pass
+    #create a copy of the letter bank to keep track of the letters used
+    word = word.upper()
+    letter_bank_copy = letter_bank.copy()
+    for letter in word:
+        if letter in letter_bank_copy:
+            letter_bank_copy.remove(letter)
+        else:
+            return False
+    return True
 
 def score_word(word):
     pass
