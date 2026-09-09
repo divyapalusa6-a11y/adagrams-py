@@ -26,6 +26,7 @@ def uses_available_letters(word, letter_bank):
             letter_bank_copy.remove(letter)
         else:
             return False
+    #print(letter_bank)
     return True
 
 def score_word(word):
