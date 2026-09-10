@@ -49,7 +49,7 @@ def get_highest_word_score(word_list):
     for word in word_list:
         word_score = score_word(word)
         total_score_chart[word] = word_score
-    high_score =0
+    high_score = 0
     best_word = ""
     for word,score in total_score_chart.items():
         if score > high_score:
@@ -64,3 +64,4 @@ def get_highest_word_score(word_list):
             best_word = word
             high_score = score
     return best_word, high_score
+    
