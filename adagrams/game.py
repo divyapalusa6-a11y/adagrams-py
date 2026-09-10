@@ -15,7 +15,7 @@ def draw_letters():
     hand = [] #create a hand of 10 letters by randomly selecting from the list and removing 
     #the selected letter from the list to avoid duplicates
     NUM_TILES_ALLOWED_IN_HAND = 10
-    for draw_count in range(NUM_TILES_ALLOWED_IN_HAND): # repeat the process 10 times to get 10 letters in the hand
+    for draw_count in range(NUM_TILES_ALLOWED_IN_HAND): #repeat the process 10 times to get 10 letters in the hand
         random_index = randint(0, len(list)-1)
         hand.append(list[random_index])
         list.remove(list[random_index])
@@ -36,8 +36,9 @@ def uses_available_letters(word, letter_bank):
     return True
 
 def score_word(word):
-    sum_of_points = 0
-    BONUS_POINTS_FOR_LENGTH = 8
+    sum_of_points = 0 #initialize sum of points to 0
+    BONUS_POINTS_FOR_LENGTH = 8 # initialize bonus points for length to 8 as a constant variable, 
+    #since it is not going to change and it is used in the score_word function only
     word = word.upper()
     for letter in word: # loop through each letter in the word and add the corresponding score from the SCORE_CHART and
         # if the word length is between 7 and 10, add bonus points and return the total score
@@ -53,7 +54,9 @@ def get_highest_word_score(word_list):
     for word in word_list:
         word_score = score_word(word)
         total_score_chart[word] = word_score
-    high_score = 0
+    high_score = 0 #initialize high score to 0 and best word to empty string, 
+    #then loop through the total score chart and compare the scores to find the highest score and the corresponding word,
+    #  taking into account the tie-breaking rules
     best_word = ""
     for word,score in total_score_chart.items():
         if score > high_score:  # higheest score
