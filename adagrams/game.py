@@ -12,9 +12,10 @@ def draw_letters():
     list =[]
     for letter,frequency in LETTER_POOL.items(): 
         list += [letter] * frequency
-    hand = []
+    hand = [] #create a hand of 10 letters by randomly selecting from the list and removing 
+    #the selected letter from the list to avoid duplicates
     NUM_TILES_ALLOWED_IN_HAND = 10
-    for draw_count in range(NUM_TILES_ALLOWED_IN_HAND):
+    for draw_count in range(NUM_TILES_ALLOWED_IN_HAND): # repeat the process 10 times to get 10 letters in the hand
         random_index = randint(0, len(list)-1)
         hand.append(list[random_index])
         list.remove(list[random_index])
@@ -24,7 +25,9 @@ def uses_available_letters(word, letter_bank):
     #create a copy of the letter bank to keep track of the letters used
     word = word.upper()
     letter_bank_copy = letter_bank.copy()
-    for letter in word:
+    for letter in word: # loop through each letter in the word and check if it is in the letter bank copy, if it is, 
+        #remove it from the copy, if not, return False
+        #if all letters found in the letter bank copy, return True
         if letter in letter_bank_copy:
             letter_bank_copy.remove(letter)
         else:
@@ -36,7 +39,8 @@ def score_word(word):
     sum_of_points = 0
     BONUS_POINTS_FOR_LENGTH = 8
     word = word.upper()
-    for letter in word:
+    for letter in word: # loop through each letter in the word and add the corresponding score from the SCORE_CHART and
+        # if the word length is between 7 and 10, add bonus points and return the total score
         sum_of_points += SCORE_CHART[letter]
     if len(word) >= 7 and len(word) <= 10:
         sum_of_points += BONUS_POINTS_FOR_LENGTH
@@ -52,16 +56,16 @@ def get_highest_word_score(word_list):
     high_score = 0
     best_word = ""
     for word,score in total_score_chart.items():
-        if score > high_score:
+        if score > high_score:  # higheest score
             high_score = score
             best_word = word
-        elif len(best_word) == 10:
+        elif len(best_word) == 10: #If word is 10 letters that is best word and return it with the score
             return best_word, high_score
-        elif high_score == score and len(best_word) > len(word):
+        elif high_score == score and len(best_word) > len(word): #shorter word wins in case of tie
             high_score = score
             best_word = word
-        elif len(word) == 10 and len(best_word) != 10:
+        elif len(word) == 10 and len(best_word) != 10: #10letter word gets preference in case of tie
             best_word = word
             high_score = score
-    return best_word, high_score
+    return (best_word, high_score)
     
